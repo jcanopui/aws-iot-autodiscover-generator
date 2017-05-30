@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -39,8 +40,8 @@ public class ServiceLogs implements Runnable {
 	private ObjectMapper mapper;
 	@Autowired
 	private LogInfoTO logInfoTO;
-	@Autowired
-	private LogInfoIoT logInfoIoTTO;
+//	@Autowired
+//	private LogInfoIoT logInfoIoT_TO;
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -51,7 +52,7 @@ public class ServiceLogs implements Runnable {
 	private ZonedDateTime localStart;
 	private ZonedDateTime dateInit;
 	
-	private long thingIdCount = 0;
+	private static long thingIdCount = 0;
 
 	private Random random;
 	
@@ -94,11 +95,15 @@ public class ServiceLogs implements Runnable {
 	
 	public LogInfoIoT createIoTMessage() {
     	UID thingId = new UID();
-    	IotMessageTO result = new IotMessageTO();
-    	result.setThingId(Long.toString(thingIdCount++));//thingId.toString());
-    	result.setThingType(IotConstants.LISTTHINGTYPE.get(random.nextInt(IotConstants.LISTTHINGTYPE.size())));  
+    	LogInfoIoT result = new LogInfoIoT();
+    	result.getIotMessage().setDateTime(new Date());
+    	result.getIotMessage().setThingId(Long.toString(thingIdCount++));//thingId.toString());
+    	result.getIotMessage().setThingType(IotConstants.LISTTHINGTYPE.get(random.nextInt(IotConstants.LISTTHINGTYPE.size())));  
+    	result.getIotMessage().setCategory(IotConstants.LISTTHINGCOLOR.get(random.nextInt(IotConstants.LISTTHINGCOLOR.size())));  
+    	result.getIotMessage().getPosition().
+    		calculateLocation(IotMessageTO.LONGITUDE_BCN, IotMessageTO.LATITUDE_BCN, IotMessageTO.RADIUS_BCN);
     	
-    	return logInfoIoTTO;
+    	return result;
 	}
 	
 	public LogInfoTO createAuditMessage(){

@@ -19,7 +19,8 @@
 			filePattern="${sys:logPath}/app_log_elk-%i.log" ignoreExceptions="false">
 			<PatternLayout>
 <!-- 				<Pattern>%d{yyyy-MM-dd}T%d{HH:mm:ss.SSS}Z [%t] %level %c{1.} - %m%n</Pattern> -->
-				<Pattern>%m%n</Pattern>
+<!-- 				<Pattern>34.205.28.24 - - [%d{dd/MMM/yyyy:HH:mm:ss} -0400] %m%n</Pattern>-->
+					<Pattern>%m%n</Pattern>
 			</PatternLayout>
 			<Policies>
 				<SizeBasedTriggeringPolicy size="480 MB"/>
@@ -49,11 +50,13 @@
   
   		 <Logger name="com.everis.bs.service" level="info" additivity="false">
 	      <AppenderRef ref="RollingFile"/>
+	      <!-- <AppenderRef ref="Console-Appender" />-->
 	    </Logger>
-<!--		<Root level="error">
+<!-- 
+		<Root level="info">
 			<AppenderRef ref="Console-Appender" />
-		</Root> -->
-
+		</Root> 
+-->
 <!--
 		<Logger name="journal" level="info" additivity="true">
 			<AppenderRef ref="RollingFile" />

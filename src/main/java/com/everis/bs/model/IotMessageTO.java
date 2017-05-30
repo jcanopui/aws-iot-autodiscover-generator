@@ -2,19 +2,22 @@ package com.everis.bs.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Random;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class IotMessageTO implements Serializable {
 
-	private static final long serialVersionUID = -6914812685534077807L;
-    private static final double LONGITUDE_BCN = 41.3818;
-    private static final double LATITUDE_BCN = 2.1685;
-    private static final int RADIUS_BCN = 1000;
+	public static final long serialVersionUID = -6914812685534077807L;
+	public static final double LONGITUDE_BCN = 2.1685;
+	public static final double LATITUDE_BCN = 41.3818;
+	public static final int RADIUS_BCN = 1000000;
     
 	private String thingId;
 	private String thingType;
 	private GeoLocationTO position;
-	private Date date;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+	private Date dateTime;
+	private String category;
 	
 	public IotMessageTO() {
 		super();
@@ -46,12 +49,20 @@ public class IotMessageTO implements Serializable {
 		this.position = position;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDateTime() {
+		return dateTime;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateTime(Date dateTime) {
+		this.dateTime = dateTime;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 }

@@ -7,30 +7,15 @@ public class GeoLocationTO implements Serializable {
 
 	private static final long serialVersionUID = -4092705993117204184L;
 	
-	private double latitude;
-	private double longitude;
+	private double lat;
+	private double lon;
 	
 	public GeoLocationTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public double getLatitude() {
-		return latitude;
-	}
 
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-	
 	public void calculateLocation(double plongitude, double platitude, int radius) {
 	    Random random = new Random();
 
@@ -47,7 +32,27 @@ public class GeoLocationTO implements Serializable {
 	    // Adjust the x-coordinate for the shrinking of the east-west distances
 	    double new_x = x / Math.cos(Math.toRadians(platitude));
 
-	    longitude = new_x + plongitude;
-	    latitude = y + platitude;
+	    lon = new_x + plongitude;
+	    lat = y + platitude;
+	}
+
+
+	public double getLat() {
+		return lat;
+	}
+
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+
+	public double getLon() {
+		return lon;
+	}
+
+
+	public void setLon(double lon) {
+		this.lon = lon;
 	}
 }
